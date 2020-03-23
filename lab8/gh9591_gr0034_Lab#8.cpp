@@ -18,79 +18,90 @@
 using namespace std;
 
 //==========================================================
+//Global
+//==========================================================
+int arrSize = 6;
+
+//==========================================================
 //create a class of Sort
 //==========================================================
 class Sort
 {
 public:
-    int randNumGen();
+    void randNumGen(int arr[]);
     //Will generate the random number of either 10, 100, 1000, 10000 or 100000
     
-    int selectionSort(int arr[]);
+    void selectionSort(int arr[]);
     //
     
-    int quickSort(int arr[]);
+    void quickSort(int arr[]);
     //
     
-    int mergeSort(int arr[]);
+    void mergeSort(int arr[]);
     //
-    
-private:
-    int iNum;
 };
 
 //==========================================================
 //implement the randNumGen
 //==========================================================
-int Sort::randNumGen()
+void Sort::randNumGen(int arr[])
 {
-    //declare predefined array
-    int arr[] = {10, 100, 1000, 10000, 100000};
-    
-    //generate random integer in range of 1 - 5
+    //to generate random see for rand()
     srand(time(0));
-    int randNum = rand() % 5 + 1;
     
-    //loop through the array in the range of 0 to randNum
-    for (int i = 0; i < randNum; i++)
+    //loop through the array
+    for (int i = 0; i < arrSize; i++)
     {
-        //assign the value of element of the array to iNum
-        iNum = arr[i];
+        //randomize an idex number in the range of 6
+        int index = rand() % 6;
+        //assign a value of the random index to a temperary variable then equat the numbers to the reandom index given in the array to get 1 of each of the elements in the array
+        swap(arr[i], arr[index]);
     }
-    return iNum;
+    
+    //output the array, might not use...
+    for (int i = 0; i < arrSize; i++)
+    {
+        cout << arr[i] << endl;
+    }
 }
 
 //==========================================================
 //implement selectionSort
 //==========================================================
-int Sort::selectionSort(int arr[])
+//look over this algorithm and make sure it is what he wants in the pseudo code given
+void Sort::selectionSort(int arr[])
 {
-    //initialize all elements in the array in the range of 0 to size of iNum
-    for (int i = 0; i < iNum; i++)
+    //declare variable
+    int minIndex;
+    //loop to find index
+    for (int i = 0; i < arrSize - 1; i++)
     {
-        //randomize all elements in the array
-        srand(time(0));
-        arr[i] = rand() % iNum;
+        minIndex = i;
+        for (int j = i + 1; j < arrSize; j++)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j;
+            }
+            swap(arr[i], arr[minIndex]);
+        }
     }
-    
-    
-    return 0;
 }
 
 //==========================================================
 //implement quickSort
 //==========================================================
-int Sort::quickSort(int arr[])
+void Sort::quickSort(int arr[])
 {
-    return 0;
+    cout << "working" << endl;
 }
 
 //==========================================================
 //implement mergeSort
 //==========================================================
-int Sort::mergeSort(int arr[])
+void Sort::mergeSort(int arr[])
 {
-    return 0;
+    cout << "working" << endl;
 }
 
 //==========================================================
@@ -99,10 +110,15 @@ int Sort::mergeSort(int arr[])
 int main()
 {
     //create an object
-    Sort Temp;
-    cout << Temp.randNumGen() << endl;
-    
-    
+    Sort temp;
+    int array[] = {1, 10, 100, 1000, 10000, 100000};
+    temp.randNumGen(array);
+    temp.selectionSort(array);
+    cout << "The sorted array is: " << endl;
+    for (int i = 0; i < arrSize; i++)
+    {
+        cout << array[i] << endl;
+    }
     
     return 0;
 }
